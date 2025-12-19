@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-import dj_database_url
+
 from pathlib import Path
 import os
 
@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-*3!v3)-^=@el$qc-klptsl8v&t54^e_o(s9m=yc2j=-0bhcg45
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-CSRF_TRUSTED_ORIGINS = ['https://steganography-58nq.onrender.com']
-ALLOWED_HOSTS = ["", 'steganography-58nq.onrender.com']
+#CSRF_TRUSTED_ORIGINS = ['https://steganography-58nq.onrender.com']
+ALLOWED_HOSTS = ["",'localhost','127.0.0.1', 'steganography-58nq.onrender.com']
 
 
 # Application definition
@@ -85,11 +85,22 @@ WSGI_APPLICATION = 'Image_steganography.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+#DATABASES = {
+#    'default':dj_database_url.config(
+#        default='postgresql://stegoapp_database_user:RJRlOnO0shwXgRn4C9J86SstXmuqV54v@dpg-d3i0nogdl3ps73fgnnrg-a.oregon-postgres.render.com/stegoapp_database',
+#        conn_max_age=600
+#    )
+#}
+
 DATABASES = {
-    'default':dj_database_url.config(
-        default='postgresql://stegoapp_database_user:RJRlOnO0shwXgRn4C9J86SstXmuqV54v@dpg-d3i0nogdl3ps73fgnnrg-a.oregon-postgres.render.com/stegoapp_database',
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dockerbase',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
+        'PORT': '5432'
+    }
 }
 
 
@@ -141,8 +152,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 TAILWIND_APP_NAME = 'theme'
 
 INTERNAL_IPS = ["127.0.0.1"]
-NPM_BIN_PATH = r"c:/Program Files/nodejs/npm.cmd"
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'tailwind'
+#NPM_BIN_PATH = r"c:/Program Files/nodejs/npm.cmd"
+NPM_BIN_PATH = r"/usr/bin/npm"
 CRISPY_TEMPLATE_PACK = 'tailwind'
 
 # Default primary key field type
